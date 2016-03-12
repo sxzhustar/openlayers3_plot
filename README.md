@@ -12,4 +12,4 @@
 <img src="http://git.oschina.net/uploads/images/2016/0312/094123_6d5a9b97_642920.jpeg" width=640 height=640>
 
 #### 八错，我要打赏!
-<img src="http://git.oschina.net/uploads/images/2016/0312/095357_f8639e52_642920.png" width=200 height=200>
+<img src="http://git.oschina.net/uploads/images/2016/0312/095357_f8639e52_642920.png" width=320 height=320>
