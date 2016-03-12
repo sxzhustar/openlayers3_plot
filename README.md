@@ -11,5 +11,5 @@
 
 ![demo截图](http://git.oschina.net/uploads/images/2016/0312/094123_6d5a9b97_642920.jpeg "demo截图")
 
-###### 打赏
-![打赏支付宝](http://git.oschina.net/uploads/images/2016/0312/095357_f8639e52_642920.png "打赏支付宝")
+#### 八错，我要打赏!
+![打赏支付宝](http://git.oschina.net/uploads/images/2016/0312/095357_f8639e52_642920.png "打赏支付宝" =200*200)
