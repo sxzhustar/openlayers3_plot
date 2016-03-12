@@ -37,7 +37,13 @@ P.PlotDraw.prototype.deactivate = function () {
     this.points = [];
     this.plot = null;
     this.feature = null;
+    this.plotType = null;
+    this.plotParams = null;
     this.activateMapTools();
+};
+
+P.PlotDraw.prototype.isDrawing = function(){
+    return this.plotType != null;
 };
 
 P.PlotDraw.prototype.setMap = function (value) {
@@ -77,6 +83,7 @@ P.PlotDraw.prototype.mapNextClickHandler = function (e) {
 
 P.PlotDraw.prototype.mapDoubleClickHandler = function (e) {
     this.disconnectEventHandlers();
+    this.plot.finishDrawing();
     e.preventDefault();
     this.drawEnd();
 };
@@ -90,13 +97,15 @@ P.PlotDraw.prototype.disconnectEventHandlers = function () {
 };
 
 P.PlotDraw.prototype.drawEnd = function (feature) {
-    this.dispatchEvent(new P.Event.PlotDrawEvent(P.Event.PlotDrawEvent.DRAW_END, this.feature));
     this.featureSource.removeFeature(this.feature);
     this.activateMapTools();
     this.disconnectEventHandlers();
     this.map.removeOverlay(this.drawOverlay);
     this.points = [];
     this.plot = null;
+    this.plotType = null;
+    this.plotParams = null;
+    this.dispatchEvent(new P.Event.PlotDrawEvent(P.Event.PlotDrawEvent.DRAW_END, this.feature));
     this.feature = null;
 };
 

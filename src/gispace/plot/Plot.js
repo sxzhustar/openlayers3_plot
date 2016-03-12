@@ -5,6 +5,10 @@ P.Plot = function(points){
 
 P.Plot.prototype = {
 
+    isPlot: function(){
+        return true;
+    },
+
     setPoints: function(value){
         this.points = value ? value : [];
         if(this.points.length>=2)
@@ -31,6 +35,10 @@ P.Plot.prototype = {
     },
 
     generate: function(){
+    },
+
+    finishDrawing: function(){
+
     }
 
 };

@@ -14,6 +14,13 @@ P.Plot.DoubleArrow = function(points){
 goog.inherits(P.Plot.DoubleArrow, ol.geom.Polygon);
 goog.mixin(P.Plot.DoubleArrow.prototype, P.Plot.prototype);
 
+P.Plot.DoubleArrow.prototype.finishDrawing = function(){
+    if(this.getPointCount()==3 && this.tempPoint4!=null)
+        this.points.push(this.tempPoint4);
+    if(this.connPoint!=null)
+        this.points.push(this.connPoint);
+};
+
 P.Plot.DoubleArrow.prototype.generate = function(){
     if(this.getPointCount() == 2){
         this.setCoordinates([this.points]);
@@ -22,11 +29,15 @@ P.Plot.DoubleArrow.prototype.generate = function(){
     var pnt1 = this.points[0];
     var pnt2 = this.points[1];
     var pnt3 = this.points[2];
-    if(this.getPointCount() == 3)
+    var count = this.getPointCount();
+    if(count == 3)
         this.tempPoint4 = this.getTempPoint4(pnt1, pnt2, pnt3);
     else
         this.tempPoint4 = this.points[3];
-    this.connPoint = P.PlotUtils.mid(pnt1, pnt2);
+    if(count==3 || count==4)
+        this.connPoint = P.PlotUtils.mid(pnt1, pnt2);
+    else
+        this.connPoint = this.points[4];
     var leftArrowPnts, rightArrowPnts;
     if(P.PlotUtils.isClockWise(pnt1, pnt2, pnt3)){
         leftArrowPnts = this.getArrowPoints(pnt1, this.connPoint, this.tempPoint4, false);

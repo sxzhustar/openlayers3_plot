@@ -2,8 +2,9 @@ var gulp = require('gulp');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var replace = require('gulp-replace');
+var cssnano = require('gulp-cssnano');
 
-gulp.task('compact', function () {
+gulp.task('compact-js', function () {
    return gulp.src(['./lib/goog/base.js',
        './lib/goog/idisposable.js',
        './lib/goog/disposable.js',
@@ -30,6 +31,8 @@ gulp.task('compact', function () {
        './lib/goog/events.js',
        './src/gispace/GISpace.js',
        './src/gispace/Constants.js',
+       './src/gispace/util/Utils.js',
+       './src/gispace/util/DomUtils.js',
        './src/gispace/PlotTypes.js',
        './src/gispace/PlotUtils.js',
        './src/gispace/event/Event.js',
@@ -52,9 +55,12 @@ gulp.task('compact', function () {
        './src/gispace/plot/Sector.js',
        './src/gispace/plot/StraightArrow.js',
        './src/gispace/PlotFactory.js',
-       './src/gispace/tool/PlotDraw.js'])
-       .pipe(concat('p-min.js'))
-       .pipe(replace('P.PlotUtils','P.u'))
+       './src/gispace/tool/PlotDraw.js',
+       './src/gispace/tool/PlotEdit.js'])
+       .pipe(concat('p-ol3.min.js'))
+       .pipe(replace('P.PlotUtils','P.pu'))
+       .pipe(replace('P.DomUtils','P.du'))
+       .pipe(replace('P.Utils','P.u'))
        .pipe(replace('P.Constants','P.c'))
        .pipe(replace('generate','pg'))
        .pipe(replace('.distance','.ua'))
@@ -96,14 +102,49 @@ gulp.task('compact', function () {
        .pipe(replace('StraightArrow','p14'))
        .pipe(replace('TailedAttackArrow','p15'))
        .pipe(replace('TailedSquadCombat','p16'))
+       .pipe(replace('initHelperDom','ea'))
+       .pipe(replace('getMapParentElement','eb'))
+       .pipe(replace('destroyHelperDom','ec'))
+       .pipe(replace('initControlPoints','ed'))
+       .pipe(replace('controlPointMouseDownHandler','ee'))
+       .pipe(replace('controlPointMouseMoveHandler','ef'))
+       .pipe(replace('controlPointMouseUpHandler','eg'))
+       .pipe(replace('getControlPoints','eh'))
+       .pipe(replace('plotMouseOverOutHandler','ei'))
+       .pipe(replace('plotMouseDownHandler','ej'))
+       .pipe(replace('plotMouseMoveHandler','ek'))
+       .pipe(replace('plotMouseUpHandler','el'))
+       .pipe(replace('disconnectEventHandlers','em'))
+       .pipe(replace('disableMapDragPan','en'))
+       .pipe(replace('enableMapDragPan','eo'))
+       .pipe(replace('mapFirstClickHandler','da'))
+       .pipe(replace('mapMouseMoveHandler','db'))
+       .pipe(replace('mapNextClickHandler','dc'))
+       .pipe(replace('mapDoubleClickHandler','dd'))
+       .pipe(replace('disconnectEventHandlers','de'))
+       .pipe(replace('drawEnd','df'))
+       .pipe(replace('deactivateMapTools','dg'))
+       .pipe(replace('activateMapTools','dh'))
        .pipe(uglify())
        .pipe(gulp.dest('./build/'))
        .pipe(gulp.dest('./sample/'));
 });
 
+gulp.task('compact-css', function(){
+    return gulp.src('src/*.css')
+        .pipe(concat('p-ol3.min.css'))
+        .pipe(gulp.dest('./build/'))
+        .pipe(gulp.dest('./sample/'))
+        .pipe(cssnano());
+});
+
 gulp.task('default', function () {
-    var datavizWatch = gulp.watch('./src/**/*.js', ['compact']);
-    datavizWatch.on('change', function (e) {
-        console.log('File ' + e.path + ' was ' + e.type + ', running compact ...');
+    var jsWatch = gulp.watch('./src/**/*.js', ['compact-js']);
+    jsWatch.on('change', function (e) {
+        console.log('File ' + e.path + ' was ' + e.type + ', running compact js ...');
+    });
+    var cssWatch = gulp.watch('./src/*.css', ['compact-css']);
+    jsWatch.on('change', function (e) {
+        console.log('File ' + e.path + ' was ' + e.type + ', running compact css ...');
     });
 });

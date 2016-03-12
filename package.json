@@ -5,6 +5,7 @@
     "gulp-util": "^3.0.7",
     "gulp-concat": "*",
     "gulp-uglify": "*",
-    "gulp-replace": "*"
+    "gulp-replace": "*",
+    "gulp-cssnano": "*"
   }
 }

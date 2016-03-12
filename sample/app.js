@@ -14,7 +14,7 @@
  *
  * */
 
-var map, plotDraw, drawOverlay, drawStyle, featureSource;
+var map, plotDraw, plotEdit, drawOverlay, drawStyle;
 
 function init(){
     // 初始化地图，底图使用openstreetmap在线地图
@@ -34,9 +34,28 @@ function init(){
         })
     });
 
+    map.on('click', function(e){
+        if(plotDraw.isDrawing()){
+            return;
+        }
+        var feature = map.forEachFeatureAtPixel(e.pixel, function (feature, layer) {
+            return feature;
+        });
+        if(feature){
+            // 开始编辑
+            plotEdit.activate(feature);
+        }else{
+            // 结束编辑
+            plotEdit.deactivate();
+        }
+    });
+
     // 初始化标绘绘制工具，添加绘制结束事件响应
     plotDraw = new P.PlotDraw(map);
     plotDraw.on(P.Event.PlotDrawEvent.DRAW_END, onDrawEnd, false, this);
+
+    // 初始化标绘编辑工具
+    plotEdit = new P.PlotEdit(map);
 
     // 设置标绘符号显示的默认样式
     var stroke = new ol.style.Stroke({color: '#FF0000', width: 2});
@@ -44,9 +63,8 @@ function init(){
     drawStyle = new ol.style.Style({fill:fill, stroke:stroke});
 
     // 绘制好的标绘符号，添加到FeatureOverlay显示。
-    featureSource = new ol.source.Vector();
     drawOverlay = new ol.layer.Vector({
-        source: featureSource
+        source: new ol.source.Vector()
     });
     drawOverlay.setStyle(drawStyle);
     drawOverlay.setMap(map);
@@ -55,11 +73,14 @@ function init(){
 // 绘制结束后，添加到FeatureOverlay显示。
 function onDrawEnd(event){
     var feature = event.feature;
-    featureSource.addFeature(feature);
+    drawOverlay.getSource().addFeature(feature);
+    // 开始编辑
+    plotEdit.activate(feature);
 }
 
 // 指定标绘类型，开始绘制。
 function activate(type){
+    plotEdit.deactivate();
     plotDraw.activate(type);
 };
 
