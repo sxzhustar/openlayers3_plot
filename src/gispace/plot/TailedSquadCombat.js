@@ -1,6 +1,7 @@
 
 P.Plot.TailedSquadCombat = function(points){
     goog.base(this, []);
+    this.type = P.PlotTypes.TAILED_SQUAD_COMBAT;
     this.headHeightFactor = 0.18;
     this.headWidthFactor = 0.3;
     this.neckHeightFactor = 0.85;

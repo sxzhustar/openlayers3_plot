@@ -1,6 +1,7 @@
 
 P.Plot.AssaultDirection = function(points){
     goog.base(this, []);
+    this.type = P.PlotTypes.ASSAULT_DIRECTION;
     this.tailWidthFactor = 0.2;
     this.neckWidthFactor = 0.25;
     this.headWidthFactor = 0.3;

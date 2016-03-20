@@ -1,6 +1,7 @@
 
 P.Plot.Arc = function(points){
     goog.base(this, []);
+    this.type = P.PlotTypes.ARC;
     this.fixPointCount = 3;
     this.setPoints(points);
 };

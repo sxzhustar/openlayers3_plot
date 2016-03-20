@@ -1,6 +1,7 @@
 
 P.Plot.StraightArrow = function(points){
     goog.base(this, []);
+    this.type = P.PlotTypes.STRAIGHT_ARROW;
     this.fixPointCount = 2;
     this.maxArrowLength = 3000000;
     this.arrowLengthScale = 5;

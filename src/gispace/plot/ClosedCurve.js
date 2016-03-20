@@ -1,6 +1,7 @@
 
 P.Plot.ClosedCurve = function(points){
     goog.base(this, []);
+    this.type = P.PlotTypes.CLOSED_CURVE;
     this.t = 0.3;
     this.setPoints(points);
 };

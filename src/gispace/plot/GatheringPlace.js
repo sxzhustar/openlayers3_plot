@@ -1,6 +1,7 @@
 
 P.Plot.GatheringPlace = function(points){
     goog.base(this, []);
+    this.type = P.PlotTypes.GATHERING_PLACE;
     this.t = 0.4;
     this.fixPointCount = 3;
     this.setPoints(points);

@@ -1,6 +1,7 @@
 
 P.Plot.Curve = function(points){
     goog.base(this, []);
+    this.type = P.PlotTypes.CURVE;
     this.t = 0.3;
     this.setPoints(points);
 };

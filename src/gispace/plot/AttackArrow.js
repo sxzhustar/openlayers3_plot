@@ -1,6 +1,7 @@
 
 P.Plot.AttackArrow = function(points){
     goog.base(this, []);
+    this.type = P.PlotTypes.ATTACK_ARROW;
     this.headHeightFactor = 0.18;
     this.headWidthFactor = 0.3;
     this.neckHeightFactor = 0.85;

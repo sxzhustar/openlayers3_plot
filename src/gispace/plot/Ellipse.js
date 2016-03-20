@@ -1,6 +1,7 @@
 
 P.Plot.Ellipse = function(points){
     goog.base(this, []);
+    this.type = P.PlotTypes.ELLIPSE;
     this.fixPointCount = 2;
     this.setPoints(points);
 };

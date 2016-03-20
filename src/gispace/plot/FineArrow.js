@@ -1,6 +1,7 @@
 
 P.Plot.FineArrow = function(points){
     goog.base(this, []);
+    this.type = P.PlotTypes.FINE_ARROW;
     this.tailWidthFactor = 0.15;
     this.neckWidthFactor = 0.2;
     this.headWidthFactor = 0.25;

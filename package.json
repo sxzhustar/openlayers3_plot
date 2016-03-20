@@ -6,6 +6,7 @@
     "gulp-concat": "*",
     "gulp-uglify": "*",
     "gulp-replace": "*",
-    "gulp-cssnano": "*"
+    "gulp-cssnano": "*",
+    "supertest": "*"
   }
 }

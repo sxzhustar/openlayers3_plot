@@ -1,6 +1,7 @@
 
 P.Plot.Lune = function(points){
     goog.base(this, []);
+    this.type = P.PlotTypes.LUNE;
     this.fixPointCount = 3;
     this.setPoints(points);
 };

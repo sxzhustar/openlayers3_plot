@@ -1,6 +1,7 @@
 
 P.Plot.DoubleArrow = function(points){
     goog.base(this, []);
+    this.type = P.PlotTypes.DOUBLE_ARROW;
     this.headHeightFactor = 0.25;
     this.headWidthFactor = 0.3;
     this.neckHeightFactor = 0.85;

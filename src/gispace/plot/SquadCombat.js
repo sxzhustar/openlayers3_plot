@@ -1,6 +1,7 @@
 
 P.Plot.SquadCombat = function(points){
     goog.base(this, []);
+    this.type = P.PlotTypes.SQUAD_COMBAT;
     this.headHeightFactor = 0.18;
     this.headWidthFactor = 0.3;
     this.neckHeightFactor = 0.85;

@@ -1,6 +1,7 @@
 
 P.Plot.Sector = function(points){
     goog.base(this, []);
+    this.type = P.PlotTypes.SECTOR;
     this.fixPointCount = 3;
     this.setPoints(points);
 };
