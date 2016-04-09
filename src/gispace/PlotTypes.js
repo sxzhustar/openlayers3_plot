@@ -20,7 +20,7 @@ P.PlotTypes = {
     FREEHAND_POLYLINE: "freehandpolyline",
     POLYGON: "polygon",
     FREEHAND_POLYGON: "freehandpolygon",
-    RECTANGLE: "rectangle",
+    RECTANGLE: "rectangle", 
     POINT: "point",
     TRIANGLE: "triangle"
 };
