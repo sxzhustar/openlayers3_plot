@@ -35,14 +35,6 @@ P.PlotFactory.createPlot = function(type, points){
             return new P.Plot.SquadCombat(points);
         case P.PlotTypes.TAILED_SQUAD_COMBAT:
             return new P.Plot.TailedSquadCombat(points);
-        case P.PlotTypes.FREEHAND_LINE:
-            return new P.Plot.FreehandLine(points);
-        case P.PlotTypes.FREEHAND_POLYGON:
-            return new P.Plot.FreehandPolygon(points);
-        case P.PlotTypes.POLYGON:
-            return new P.Plot.Polygon(points);
-        case P.PlotTypes.POLYLINE:
-            return new P.Plot.Polyline(points);
     }
     return null;
 }

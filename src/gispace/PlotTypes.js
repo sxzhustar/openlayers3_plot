@@ -17,7 +17,7 @@ P.PlotTypes = {
     CIRCLE: "circle",
     DOUBLE_ARROW: "doublearrow",
     POLYLINE: "polyline",
-    FREEHAND_LINE: "freehandline",
+    FREEHAND_POLYLINE: "freehandpolyline",
     POLYGON: "polygon",
     FREEHAND_POLYGON: "freehandpolygon",
     RECTANGLE: "rectangle",
