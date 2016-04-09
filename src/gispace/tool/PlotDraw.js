@@ -15,7 +15,7 @@ P.PlotDraw = function(map){
     this.drawOverlay = new ol.layer.Vector({
         source: this.featureSource
     });
-    this.drawOverlay.setStyle(this.style);
+    this.drawOverlay.setStyle(this.style); 
     this.setMap(map);
 };
 
@@ -57,8 +57,11 @@ P.PlotDraw.prototype.mapFirstClickHandler = function (e) {
     this.feature = new ol.Feature(this.plot);
     this.featureSource.addFeature(this.feature);
     this.map.un("click", this.mapFirstClickHandler, this);
+    //
     this.map.on("click", this.mapNextClickHandler, this);
-    this.map.on("dblclick", this.mapDoubleClickHandler, this);
+    if(!this.plot.freehand){
+        this.map.on("dblclick", this.mapDoubleClickHandler, this);
+    }
     goog.events.listen(this.mapViewport, P.Event.EventType.MOUSEMOVE,
         this.mapMouseMoveHandler, false, this);
 };
@@ -67,16 +70,26 @@ P.PlotDraw.prototype.mapMouseMoveHandler = function (e) {
     var coordinate = map.getCoordinateFromPixel([e.clientX, e.clientY]);
     if (P.PlotUtils.distance(coordinate, this.points[this.points.length - 1]) < P.Constants.ZERO_TOLERANCE)
         return;
-    var pnts = this.points.concat([coordinate]);
-    this.plot.setPoints(pnts);
+    if(!this.plot.freehand){
+        var pnts = this.points.concat([coordinate]);
+        this.plot.setPoints(pnts);
+    }else{
+        this.points.push(coordinate);
+        this.plot.setPoints(this.points);
+    }
 };
 
 P.PlotDraw.prototype.mapNextClickHandler = function (e) {
-    if (P.PlotUtils.distance(e.coordinate, this.points[this.points.length - 1]) < P.Constants.ZERO_TOLERANCE)
-        return;
+    if(!this.plot.freehand){
+        if (P.PlotUtils.distance(e.coordinate, this.points[this.points.length - 1]) < P.Constants.ZERO_TOLERANCE)
+            return;
+    }
     this.points.push(e.coordinate);
     this.plot.setPoints(this.points);
     if (this.plot.fixPointCount == this.plot.getPointCount()) {
+        this.mapDoubleClickHandler(e);
+    }
+    if(this.plot.freehand){
         this.mapDoubleClickHandler(e);
     }
 };

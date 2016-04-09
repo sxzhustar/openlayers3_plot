@@ -54,6 +54,10 @@ gulp.task('compact-js', function () {
        './src/gispace/plot/Lune.js',
        './src/gispace/plot/Sector.js',
        './src/gispace/plot/StraightArrow.js',
+       './src/gispace/plot/Polyline.js',
+       './src/gispace/plot/FreehandLine.js',
+       './src/gispace/plot/Polygon.js',
+       './src/gispace/plot/FreehandPolygon.js',
        './src/gispace/PlotFactory.js',
        './src/gispace/tool/PlotDraw.js',
        './src/gispace/tool/PlotEdit.js'])
