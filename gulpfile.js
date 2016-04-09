@@ -62,7 +62,7 @@ gulp.task('compact-js', function () {
        './src/gispace/tool/PlotDraw.js',
        './src/gispace/tool/PlotEdit.js'])
        .pipe(concat('p-ol3.min.js'))
-       //.pipe(uglify())
+       .pipe(uglify())
        .pipe(gulp.dest('./build/'))
        .pipe(gulp.dest('./sample/'));
 });
