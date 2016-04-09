@@ -15,7 +15,7 @@ P.PlotDraw = function(map){
     this.drawOverlay = new ol.layer.Vector({
         source: this.featureSource
     });
-    this.drawOverlay.setStyle(this.style); 
+    this.drawOverlay.setStyle(this.style);
     this.setMap(map);
 };
 
@@ -67,7 +67,7 @@ P.PlotDraw.prototype.mapFirstClickHandler = function (e) {
 };
 
 P.PlotDraw.prototype.mapMouseMoveHandler = function (e) {
-    var coordinate = map.getCoordinateFromPixel([e.clientX, e.clientY]);
+    var coordinate = map.getCoordinateFromPixel([e.offsetX, e.offsetY]);
     if (P.PlotUtils.distance(coordinate, this.points[this.points.length - 1]) < P.Constants.ZERO_TOLERANCE)
         return;
     if(!this.plot.freehand){

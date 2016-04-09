@@ -57,6 +57,7 @@ P.PlotEdit.prototype.destroyHelperDom = function(){
             var element = P.DomUtils.get(this.Constants.HELPER_CONTROL_POINT_DIV + '-' + i);
             if(element){
                 P.DomUtils.removeListener(element, 'mousedown', this.controlPointMouseDownHandler, this);
+                P.DomUtils.removeListener(element, 'mousemove', this.controlPointMouseMoveHandler2, this);
             }
         }
         this.controlPoints = null;
@@ -87,7 +88,12 @@ P.PlotEdit.prototype.initControlPoints = function(){
         this.controlPoints.push(pnt);
         this.map.addOverlay(pnt);
         P.DomUtils.addListener(element, 'mousedown', this.controlPointMouseDownHandler, this);
+        P.DomUtils.addListener(element, 'mousemove', this.controlPointMouseMoveHandler2, this);
     }
+};
+
+P.PlotEdit.prototype.controlPointMouseMoveHandler2 = function(e){
+    e.stopImmediatePropagation();
 };
 
 P.PlotEdit.prototype.controlPointMouseDownHandler = function(e){
@@ -98,7 +104,7 @@ P.PlotEdit.prototype.controlPointMouseDownHandler = function(e){
 };
 
 P.PlotEdit.prototype.controlPointMouseMoveHandler = function(e){
-    var coordinate = map.getCoordinateFromPixel([e.clientX, e.clientY]);
+    var coordinate = map.getCoordinateFromPixel([e.offsetX, e.offsetY]);
     if(this.activeControlPointId){
         var plot = this.activePlot.getGeometry();
         var index = this.elementTable[this.activeControlPointId];
