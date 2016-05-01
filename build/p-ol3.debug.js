@@ -1532,7 +1532,7 @@ P.PlotDraw.prototype.mapNextClickHandler = function (e) {
     if (this.plot.fixPointCount == this.plot.getPointCount()) {
         this.mapDoubleClickHandler(e);
     }
-    if(this.plot.freehand){
+    if(this.plot && this.plot.freehand){
         this.mapDoubleClickHandler(e);
     }
 };
@@ -1618,7 +1618,7 @@ P.PlotEdit.prototype.initHelperDom = function(){
        return;
     }
     var hiddenDiv = P.DomUtils.createHidden('div', parent, this.Constants.HELPER_HIDDEN_DIV);
-    // 根据控制点数添加div
+
     var cPnts = this.getControlPoints();
     for(var i=0; i<cPnts.length; i++){
         var id = this.Constants.HELPER_CONTROL_POINT_DIV + '-' + i;
@@ -1723,7 +1723,7 @@ P.PlotEdit.prototype.activate = function(plot){
     this.activePlot = plot;
     //
     this.map.on("pointermove", this.plotMouseOverOutHandler, this);
-    // 添加编辑工具附注标签
+    
     this.initHelperDom();
     //
     this.initControlPoints();

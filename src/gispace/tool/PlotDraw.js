@@ -89,7 +89,7 @@ P.PlotDraw.prototype.mapNextClickHandler = function (e) {
     if (this.plot.fixPointCount == this.plot.getPointCount()) {
         this.mapDoubleClickHandler(e);
     }
-    if(this.plot.freehand){
+    if(this.plot && this.plot.freehand){
         this.mapDoubleClickHandler(e);
     }
 };
