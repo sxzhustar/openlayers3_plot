@@ -45,19 +45,13 @@ function init(){
         if(feature){
             // 开始编辑
             plotEdit.activate(feature);
+            activeDelBtn();
         }else{
             // 结束编辑
             plotEdit.deactivate();
+            deactiveDelBtn();
         }
     });
-
-    // 监听键盘事件,实现删除标绘
-    document.onkeydown = function(e){
-        if(e.keyCode == 8 && drawOverlay && plotEdit && plotEdit.activePlot){
-            drawOverlay.getSource().removeFeature(plotEdit.activePlot);
-            plotEdit.deactivate();
-        }
-    };
 
     // 初始化标绘绘制工具，添加绘制结束事件响应
     plotDraw = new P.PlotDraw(map);
@@ -77,6 +71,14 @@ function init(){
     });
     drawOverlay.setStyle(drawStyle);
     drawOverlay.setMap(map);
+
+    get('btn-delete').onclick = function(){
+        if(drawOverlay && plotEdit && plotEdit.activePlot){
+            drawOverlay.getSource().removeFeature(plotEdit.activePlot);
+            plotEdit.deactivate();
+            deactiveDelBtn();
+        }
+    };
 }
 
 // 绘制结束后，添加到FeatureOverlay显示。
@@ -85,6 +87,7 @@ function onDrawEnd(event){
     drawOverlay.getSource().addFeature(feature);
     // 开始编辑
     plotEdit.activate(feature);
+    activeDelBtn();
 }
 
 // 指定标绘类型，开始绘制。
@@ -99,4 +102,16 @@ function showAbout(){
 
 function hideAbout(){
     document.getElementById("aboutContainer").style.visibility = "hidden";
+}
+
+function get(domId){
+    return document.getElementById(domId);
+}
+
+function activeDelBtn(){
+    get('btn-delete').style.display = 'inline-block';
+}
+
+function deactiveDelBtn(){
+    get('btn-delete').style.display = 'none';
 }
