@@ -23,7 +23,11 @@ P.Plot.DoubleArrow.prototype.finishDrawing = function(){
 };
 
 P.Plot.DoubleArrow.prototype.generate = function(){
-    if(this.getPointCount() == 2){
+    var count = this.getPointCount();
+    if(count<2) {
+        return;
+    }
+    if(count == 2){
         this.setCoordinates([this.points]);
         return;
     }

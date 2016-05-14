@@ -14,8 +14,9 @@ goog.inherits(P.Plot.AttackArrow, ol.geom.Polygon);
 goog.mixin(P.Plot.AttackArrow.prototype, P.Plot.prototype);
 
 P.Plot.AttackArrow.prototype.generate = function () {
-    if (this.getPointCount() < 2)
+    if (this.getPointCount() < 2){
         return;
+    }
     if (this.getPointCount() == 2) {
         this.setCoordinates([this.points]);
         return;

@@ -58,6 +58,11 @@ P.PlotDraw.prototype.mapFirstClickHandler = function (e) {
     this.featureSource.addFeature(this.feature);
     this.map.un("click", this.mapFirstClickHandler, this);
     //
+    if (this.plot.fixPointCount == this.plot.getPointCount()) {
+        this.mapDoubleClickHandler(e);
+        return;
+    }
+    //
     this.map.on("click", this.mapNextClickHandler, this);
     if(!this.plot.freehand){
         this.map.on("dblclick", this.mapDoubleClickHandler, this);
@@ -88,6 +93,7 @@ P.PlotDraw.prototype.mapNextClickHandler = function (e) {
     this.plot.setPoints(this.points);
     if (this.plot.fixPointCount == this.plot.getPointCount()) {
         this.mapDoubleClickHandler(e);
+        return;
     }
     if(this.plot && this.plot.freehand){
         this.mapDoubleClickHandler(e);

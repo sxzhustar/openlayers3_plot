@@ -16,6 +16,10 @@ P.Plot.TailedAttackArrow = function(points){
 goog.inherits(P.Plot.TailedAttackArrow, P.Plot.AttackArrow);
 
 P.Plot.TailedAttackArrow.prototype.generate = function(){
+    var count = this.getPointCount();
+    if(count < 2) {
+        return;
+    }
     if(this.getPointCount() == 2){
         this.setCoordinates([this.points]);
         return;

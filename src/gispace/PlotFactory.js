@@ -41,6 +41,10 @@ P.PlotFactory.createPlot = function(type, points){
             return new P.Plot.FreehandPolygon(points);
         case P.PlotTypes.POLYGON:
             return new P.Plot.Polygon(points);
+        case P.PlotTypes.MARKER:
+            return new P.Plot.Marker(points);
+        case P.PlotTypes.RECTANGLE:
+            return new P.Plot.Rectangle(points);
         case P.PlotTypes.POLYLINE:
             return new P.Plot.Polyline(points);
     }

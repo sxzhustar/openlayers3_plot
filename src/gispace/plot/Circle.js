@@ -10,6 +10,10 @@ goog.inherits(P.Plot.Circle, ol.geom.Polygon);
 goog.mixin(P.Plot.Circle.prototype, P.Plot.prototype);
 
 P.Plot.Circle.prototype.generate = function(){
+    var count = this.getPointCount();
+    if(count < 2) {
+        return;
+    }
     var center = this.points[0];
     var radius = P.PlotUtils.distance(center, this.points[1]);
     this.setCoordinates([this.generatePoints(center, radius)]);

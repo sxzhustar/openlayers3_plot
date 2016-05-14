@@ -63,7 +63,8 @@ function init(){
     // 设置标绘符号显示的默认样式
     var stroke = new ol.style.Stroke({color: '#FF0000', width: 2});
     var fill = new ol.style.Fill({color: 'rgba(0,255,0,0.4)'});
-    drawStyle = new ol.style.Style({fill:fill, stroke:stroke});
+    var image = new ol.style.Circle({fill: fill, stroke: stroke, radius: 8});
+    drawStyle = new ol.style.Style({image: image, fill:fill, stroke:stroke});
 
     // 绘制好的标绘符号，添加到FeatureOverlay显示。
     drawOverlay = new ol.layer.Vector({

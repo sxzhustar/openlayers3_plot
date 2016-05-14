@@ -57,6 +57,8 @@ gulp.task('compact-js', function () {
        './src/gispace/plot/Polyline.js',
        './src/gispace/plot/FreehandLine.js',
        './src/gispace/plot/Polygon.js',
+       './src/gispace/plot/Marker.js',
+       './src/gispace/plot/Rectangle.js',
        './src/gispace/plot/FreehandPolygon.js',
        './src/gispace/PlotFactory.js',
        './src/gispace/tool/PlotDraw.js',
@@ -64,7 +66,8 @@ gulp.task('compact-js', function () {
        .pipe(concat('p-ol3.min.js'))
        .pipe(uglify())
        .pipe(gulp.dest('./build/'))
-       .pipe(gulp.dest('./sample/'));
+       .pipe(gulp.dest('./sample/'))
+       .pipe(gulp.dest('./sample/static/js'));
 });
 
 gulp.task('compact-js-debug', function () {
@@ -96,13 +99,16 @@ gulp.task('compact-js-debug', function () {
             './src/gispace/plot/Polyline.js',
             './src/gispace/plot/FreehandLine.js',
             './src/gispace/plot/Polygon.js',
+            './src/gispace/plot/Marker.js',
+            './src/gispace/plot/Rectangle.js',
             './src/gispace/plot/FreehandPolygon.js',
             './src/gispace/PlotFactory.js',
             './src/gispace/tool/PlotDraw.js',
             './src/gispace/tool/PlotEdit.js'])
         .pipe(concat('p-ol3.debug.js'))
         .pipe(gulp.dest('./build/'))
-        .pipe(gulp.dest('./sample/'));
+        .pipe(gulp.dest('./sample/'))
+        .pipe(gulp.dest('./sample/static/js'));
 });
 
 gulp.task('compact-css', function(){

@@ -12,8 +12,9 @@ goog.inherits(P.Plot.StraightArrow, ol.geom.LineString);
 goog.mixin(P.Plot.StraightArrow.prototype, P.Plot.prototype);
 
 P.Plot.StraightArrow.prototype.generate = function(){
-    if(this.getPointCount()<2)
+    if(this.getPointCount()<2) {
         return;
+    }
     var pnts = this.getPoints();
     var pnt1 = pnts[0];
     var pnt2 = pnts[1];

@@ -11,7 +11,7 @@ P.Plot.prototype = {
 
     setPoints: function(value){
         this.points = value ? value : [];
-        if(this.points.length>=2)
+        if(this.points.length>=1)
             this.generate();
     },
 

@@ -15,6 +15,10 @@ goog.inherits(P.Plot.FineArrow, ol.geom.Polygon);
 goog.mixin(P.Plot.FineArrow.prototype, P.Plot.prototype);
 
 P.Plot.FineArrow.prototype.generate = function(){
+    var count = this.getPointCount();
+    if(count < 2) {
+        return;
+    }
     var pnts = this.getPoints();
     var pnt1 = pnts[0];
     var pnt2 = pnts[1];

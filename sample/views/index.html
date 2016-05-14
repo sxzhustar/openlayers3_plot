@@ -15,6 +15,10 @@
 </div>
 <div id="menu">
     <div>
+        点标
+        <button type="button" onclick="activate(P.PlotTypes.MARKER)">点</button>
+    </div>
+    <div>
         线标
         <button type="button" onclick="activate(P.PlotTypes.ARC)">弧线</button>
         <button type="button" onclick="activate(P.PlotTypes.CURVE)">曲线</button>
@@ -29,6 +33,7 @@
         <button type="button" onclick="activate(P.PlotTypes.SECTOR)">扇形</button>
         <button type="button" onclick="activate(P.PlotTypes.CLOSED_CURVE)">曲线面</button>
         <button type="button" onclick="activate(P.PlotTypes.POLYGON)">多边形</button>
+        <button type="button" onclick="activate(P.PlotTypes.RECTANGLE)">矩形</button>
         <button type="button" onclick="activate(P.PlotTypes.FREEHAND_POLYGON)">自由面</button>
         <button type="button" onclick="activate(P.PlotTypes.GATHERING_PLACE)">聚集地</button>
     </div>
@@ -55,8 +60,8 @@
 <div id="delete-wrapper">
     <div id="btn-delete" style="display:none;">删 除</div>
 </div>
-<script src="/js/ol.js"></script>
-<script src="/js/p-ol3.min.js"></script>
+<script src="/js/ol-debug.js"></script>
+<script src="/js/p-ol3.debug.js"></script>
 <script src="/js/app.js"></script>
 </body>
 </html>

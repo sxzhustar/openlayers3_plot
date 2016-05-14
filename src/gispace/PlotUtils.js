@@ -95,7 +95,7 @@ P.PlotUtils.getThirdPoint = function(startPnt, endPnt, angle, distance, clockWis
     var alpha = clockWise ? azimuth+angle : azimuth-angle;
     var dx=distance * Math.cos(alpha);
     var dy=distance * Math.sin(alpha);
-    return [endPnt[0] + dx, endPnt[1] + dy];
+    return [endPnt[0] + dx, endPnt[1] + dy]; 
 };
 
 P.PlotUtils.getArcPoints = function(center, radius, startAngle, endAngle){

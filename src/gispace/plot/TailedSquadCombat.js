@@ -15,6 +15,10 @@ P.Plot.TailedSquadCombat = function(points){
 goog.inherits(P.Plot.TailedSquadCombat, P.Plot.AttackArrow);
 
 P.Plot.TailedSquadCombat.prototype.generate = function () {
+    var count = this.getPointCount();
+    if(count < 2) {
+        return;
+    }
     var pnts = this.getPoints();
     var tailPnts = this.getTailPoints(pnts);
     var headPnts = this.getArrowHeadPoints(pnts, tailPnts[0], tailPnts[2]);

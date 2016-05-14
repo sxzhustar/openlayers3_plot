@@ -11,11 +11,12 @@ goog.mixin(P.Plot.Arc.prototype, P.Plot.prototype);
 
 P.Plot.Arc.prototype.generate = function(){
     var count = this.getPointCount();
-    if(count<2)
+    if(count < 2){
         return;
-    if(count==2)
+    }
+    if(count==2) {
         this.setCoordinates(this.points);
-    else{
+    }else{
         var pnt1 = this.points[0];
         var pnt2 = this.points[1];
         var pnt3 = this.points[2];

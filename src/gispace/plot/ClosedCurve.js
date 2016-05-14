@@ -10,8 +10,13 @@ goog.inherits(P.Plot.ClosedCurve, ol.geom.Polygon);
 goog.mixin(P.Plot.ClosedCurve.prototype, P.Plot.prototype);
 
 P.Plot.ClosedCurve.prototype.generate = function(){
-    if(this.getPointCount()==2)
+    var count = this.getPointCount();
+    if(count < 2) {
+        return;
+    }
+    if(count == 2) {
         this.setCoordinates([this.points]);
+    }
     else{
         var pnts = this.getPoints();
         pnts.push(pnts[0], pnts[1]);

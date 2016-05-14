@@ -179,7 +179,7 @@ P.PlotTypes = {
     POLYGON: "polygon",
     FREEHAND_POLYGON: "freehandpolygon",
     RECTANGLE: "rectangle", 
-    POINT: "point",
+    MARKER: "marker",
     TRIANGLE: "triangle"
 };
 
@@ -279,7 +279,7 @@ P.PlotUtils.getThirdPoint = function(startPnt, endPnt, angle, distance, clockWis
     var alpha = clockWise ? azimuth+angle : azimuth-angle;
     var dx=distance * Math.cos(alpha);
     var dy=distance * Math.sin(alpha);
-    return [endPnt[0] + dx, endPnt[1] + dy];
+    return [endPnt[0] + dx, endPnt[1] + dy]; 
 };
 
 P.PlotUtils.getArcPoints = function(center, radius, startAngle, endAngle){
@@ -562,7 +562,7 @@ P.Plot.prototype = {
 
     setPoints: function(value){
         this.points = value ? value : [];
-        if(this.points.length>=2)
+        if(this.points.length>=1)
             this.generate();
     },
 
@@ -608,11 +608,12 @@ goog.mixin(P.Plot.Arc.prototype, P.Plot.prototype);
 
 P.Plot.Arc.prototype.generate = function(){
     var count = this.getPointCount();
-    if(count<2)
+    if(count < 2){
         return;
-    if(count==2)
+    }
+    if(count==2) {
         this.setCoordinates(this.points);
-    else{
+    }else{
         var pnt1 = this.points[0];
         var pnt2 = this.points[1];
         var pnt3 = this.points[2];
@@ -648,8 +649,9 @@ goog.inherits(P.Plot.AttackArrow, ol.geom.Polygon);
 goog.mixin(P.Plot.AttackArrow.prototype, P.Plot.prototype);
 
 P.Plot.AttackArrow.prototype.generate = function () {
-    if (this.getPointCount() < 2)
+    if (this.getPointCount() < 2){
         return;
+    }
     if (this.getPointCount() == 2) {
         this.setCoordinates([this.points]);
         return;
@@ -739,6 +741,10 @@ P.Plot.SquadCombat = function(points){
 goog.inherits(P.Plot.SquadCombat, P.Plot.AttackArrow);
 
 P.Plot.SquadCombat.prototype.generate = function () {
+    var count = this.getPointCount();
+    if(count < 2) {
+        return;
+    }
     var pnts = this.getPoints();
     var tailPnts = this.getTailPoints(pnts);
     var headPnts = this.getArrowHeadPoints(pnts, tailPnts[0], tailPnts[1]);
@@ -782,6 +788,10 @@ P.Plot.TailedAttackArrow = function(points){
 goog.inherits(P.Plot.TailedAttackArrow, P.Plot.AttackArrow);
 
 P.Plot.TailedAttackArrow.prototype.generate = function(){
+    var count = this.getPointCount();
+    if(count < 2) {
+        return;
+    }
     if(this.getPointCount() == 2){
         this.setCoordinates([this.points]);
         return;
@@ -832,6 +842,10 @@ P.Plot.TailedSquadCombat = function(points){
 goog.inherits(P.Plot.TailedSquadCombat, P.Plot.AttackArrow);
 
 P.Plot.TailedSquadCombat.prototype.generate = function () {
+    var count = this.getPointCount();
+    if(count < 2) {
+        return;
+    }
     var pnts = this.getPoints();
     var tailPnts = this.getTailPoints(pnts);
     var headPnts = this.getArrowHeadPoints(pnts, tailPnts[0], tailPnts[2]);
@@ -871,6 +885,10 @@ goog.inherits(P.Plot.Circle, ol.geom.Polygon);
 goog.mixin(P.Plot.Circle.prototype, P.Plot.prototype);
 
 P.Plot.Circle.prototype.generate = function(){
+    var count = this.getPointCount();
+    if(count < 2) {
+        return;
+    }
     var center = this.points[0];
     var radius = P.PlotUtils.distance(center, this.points[1]);
     this.setCoordinates([this.generatePoints(center, radius)]);
@@ -900,8 +918,13 @@ goog.inherits(P.Plot.ClosedCurve, ol.geom.Polygon);
 goog.mixin(P.Plot.ClosedCurve.prototype, P.Plot.prototype);
 
 P.Plot.ClosedCurve.prototype.generate = function(){
-    if(this.getPointCount()==2)
+    var count = this.getPointCount();
+    if(count < 2) {
+        return;
+    }
+    if(count == 2) {
         this.setCoordinates([this.points]);
+    }
     else{
         var pnts = this.getPoints();
         pnts.push(pnts[0], pnts[1]);
@@ -939,10 +962,15 @@ goog.inherits(P.Plot.Curve, ol.geom.LineString);
 goog.mixin(P.Plot.Curve.prototype, P.Plot.prototype);
 
 P.Plot.Curve.prototype.generate = function(){
-    if(this.getPointCount()==2)
+    var count = this.getPointCount();
+    if(count < 2) {
+        return;
+    }
+    if(count == 2) {
         this.setCoordinates(this.points);
-    else
+    } else {
         this.setCoordinates(P.PlotUtils.getCurvePoints(this.t, this.points));
+    }
 };
 
 P.Plot.DoubleArrow = function(points){
@@ -969,7 +997,11 @@ P.Plot.DoubleArrow.prototype.finishDrawing = function(){
 };
 
 P.Plot.DoubleArrow.prototype.generate = function(){
-    if(this.getPointCount() == 2){
+    var count = this.getPointCount();
+    if(count<2) {
+        return;
+    }
+    if(count == 2){
         this.setCoordinates([this.points]);
         return;
     }
@@ -1127,8 +1159,10 @@ goog.inherits(P.Plot.Ellipse, ol.geom.Polygon);
 goog.mixin(P.Plot.Ellipse.prototype, P.Plot.prototype);
 
 P.Plot.Ellipse.prototype.generate = function(){
-    if(this.getPointCount()<2)
+    var count = this.getPointCount();
+    if(count < 2) {
         return;
+    }
     var pnt1 = this.points[0];
     var pnt2 = this.points[1];
     var center = P.PlotUtils.mid(pnt1, pnt2);
@@ -1166,6 +1200,10 @@ goog.inherits(P.Plot.FineArrow, ol.geom.Polygon);
 goog.mixin(P.Plot.FineArrow.prototype, P.Plot.prototype);
 
 P.Plot.FineArrow.prototype.generate = function(){
+    var count = this.getPointCount();
+    if(count < 2) {
+        return;
+    }
     var pnts = this.getPoints();
     var pnt1 = pnts[0];
     var pnt2 = pnts[1];
@@ -1209,8 +1247,9 @@ goog.mixin(P.Plot.GatheringPlace.prototype, P.Plot.prototype);
 
 P.Plot.GatheringPlace.prototype.generate = function(){
     var pnts = this.getPoints();
-    if(pnts.length<2)
+    if(pnts.length<2){
         return;
+    }
     if(this.getPointCount()==2){
         var mid = P.PlotUtils.mid(pnts[0], pnts[1]);
         var d = P.PlotUtils.distance(pnts[0], mid)/0.9;
@@ -1255,8 +1294,9 @@ goog.inherits(P.Plot.Lune, ol.geom.Polygon);
 goog.mixin(P.Plot.Lune.prototype, P.Plot.prototype);
 
 P.Plot.Lune.prototype.generate = function(){
-    if(this.getPointCount()<2)
+    if(this.getPointCount()<2) {
         return;
+    }
     var pnts = this.getPoints();
     if(this.getPointCount()==2){
         var mid = P.PlotUtils.mid(pnts[0], pnts[1]);
@@ -1327,8 +1367,9 @@ goog.inherits(P.Plot.StraightArrow, ol.geom.LineString);
 goog.mixin(P.Plot.StraightArrow.prototype, P.Plot.prototype);
 
 P.Plot.StraightArrow.prototype.generate = function(){
-    if(this.getPointCount()<2)
+    if(this.getPointCount()<2) {
         return;
+    }
     var pnts = this.getPoints();
     var pnt1 = pnts[0];
     var pnt2 = pnts[1];
@@ -1350,6 +1391,10 @@ goog.inherits(P.Plot.Polyline, ol.geom.LineString);
 goog.mixin(P.Plot.Polyline.prototype, P.Plot.prototype);
 
 P.Plot.Polyline.prototype.generate = function(){
+    var count = this.getPointCount();
+    if(count < 2) {
+        return;
+    }
     this.setCoordinates(this.points);
 };
 
@@ -1364,6 +1409,10 @@ goog.inherits(P.Plot.FreehandLine, ol.geom.LineString);
 goog.mixin(P.Plot.FreehandLine.prototype, P.Plot.prototype);
 
 P.Plot.FreehandLine.prototype.generate = function(){
+    var count = this.getPointCount();
+    if(count < 2) {
+        return;
+    }
     this.setCoordinates(this.points);
 };
 
@@ -1377,7 +1426,57 @@ goog.inherits(P.Plot.Polygon, ol.geom.Polygon);
 goog.mixin(P.Plot.Polygon.prototype, P.Plot.prototype);
 
 P.Plot.Polygon.prototype.generate = function() {
+    var count = this.getPointCount();
+    if(count < 2) {
+        return;
+    }
     this.setCoordinates([this.points]);
+};
+
+P.Plot.Marker = function(points){
+    goog.base(this, [0,0]);
+    this.type = P.PlotTypes.MARKER;
+    this.fixPointCount = 1;
+    this.setPoints(points);
+}
+
+goog.inherits(P.Plot.Marker, ol.geom.Point);
+goog.mixin(P.Plot.Marker.prototype, P.Plot.prototype);
+
+P.Plot.Marker.prototype.generate = function(){
+    var pnt = this.points[0];
+    this.setCoordinates(pnt);
+};
+
+
+
+P.Plot.Rectangle = function(points){
+    goog.base(this, []);
+    this.type = P.PlotTypes.RECTANGLE;
+    this.fixPointCount = 2;
+    this.setPoints(points);
+};
+
+goog.inherits(P.Plot.Rectangle, ol.geom.Polygon);
+goog.mixin(P.Plot.Rectangle.prototype, P.Plot.prototype);
+
+P.Plot.Rectangle.prototype.generate = function(){
+    var count = this.getPointCount();
+    if(count<2) {
+        return;
+    }else{
+        var pnt1 = this.points[0];
+        var pnt2 = this.points[1];
+        var xmin = Math.min(pnt1[0], pnt2[0]);
+        var xmax = Math.max(pnt1[0], pnt2[0]);
+        var ymin = Math.min(pnt1[1], pnt2[1]);
+        var ymax = Math.max(pnt1[1], pnt2[1]);
+        var tl = [xmin, ymax];
+        var tr = [xmax, ymax];
+        var br = [xmax, ymin];
+        var bl = [xmin, ymin];
+        this.setCoordinates([[tl, tr, br, bl]]);
+    }
 };
 
 P.Plot.FreehandPolygon = function(points){
@@ -1391,6 +1490,10 @@ goog.inherits(P.Plot.FreehandPolygon, ol.geom.Polygon);
 goog.mixin(P.Plot.FreehandPolygon.prototype, P.Plot.prototype);
 
 P.Plot.FreehandPolygon.prototype.generate = function() {
+    var count = this.getPointCount();
+    if(count < 2) {
+        return;
+    }
     this.setCoordinates([this.points]);
 };
 
@@ -1436,6 +1539,10 @@ P.PlotFactory.createPlot = function(type, points){
             return new P.Plot.FreehandPolygon(points);
         case P.PlotTypes.POLYGON:
             return new P.Plot.Polygon(points);
+        case P.PlotTypes.MARKER:
+            return new P.Plot.Marker(points);
+        case P.PlotTypes.RECTANGLE:
+            return new P.Plot.Rectangle(points);
         case P.PlotTypes.POLYLINE:
             return new P.Plot.Polyline(points);
     }
@@ -1501,6 +1608,11 @@ P.PlotDraw.prototype.mapFirstClickHandler = function (e) {
     this.featureSource.addFeature(this.feature);
     this.map.un("click", this.mapFirstClickHandler, this);
     //
+    if (this.plot.fixPointCount == this.plot.getPointCount()) {
+        this.mapDoubleClickHandler(e);
+        return;
+    }
+    //
     this.map.on("click", this.mapNextClickHandler, this);
     if(!this.plot.freehand){
         this.map.on("dblclick", this.mapDoubleClickHandler, this);
@@ -1531,6 +1643,7 @@ P.PlotDraw.prototype.mapNextClickHandler = function (e) {
     this.plot.setPoints(this.points);
     if (this.plot.fixPointCount == this.plot.getPointCount()) {
         this.mapDoubleClickHandler(e);
+        return;
     }
     if(this.plot && this.plot.freehand){
         this.mapDoubleClickHandler(e);

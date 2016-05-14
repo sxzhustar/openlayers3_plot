@@ -21,6 +21,6 @@ P.PlotTypes = {
     POLYGON: "polygon",
     FREEHAND_POLYGON: "freehandpolygon",
     RECTANGLE: "rectangle", 
-    POINT: "point",
+    MARKER: "marker",
     TRIANGLE: "triangle"
 };

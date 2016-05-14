@@ -10,8 +10,9 @@ goog.inherits(P.Plot.Lune, ol.geom.Polygon);
 goog.mixin(P.Plot.Lune.prototype, P.Plot.prototype);
 
 P.Plot.Lune.prototype.generate = function(){
-    if(this.getPointCount()<2)
+    if(this.getPointCount()<2) {
         return;
+    }
     var pnts = this.getPoints();
     if(this.getPointCount()==2){
         var mid = P.PlotUtils.mid(pnts[0], pnts[1]);

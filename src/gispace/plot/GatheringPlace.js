@@ -12,8 +12,9 @@ goog.mixin(P.Plot.GatheringPlace.prototype, P.Plot.prototype);
 
 P.Plot.GatheringPlace.prototype.generate = function(){
     var pnts = this.getPoints();
-    if(pnts.length<2)
+    if(pnts.length<2){
         return;
+    }
     if(this.getPointCount()==2){
         var mid = P.PlotUtils.mid(pnts[0], pnts[1]);
         var d = P.PlotUtils.distance(pnts[0], mid)/0.9;

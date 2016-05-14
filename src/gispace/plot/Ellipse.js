@@ -10,8 +10,10 @@ goog.inherits(P.Plot.Ellipse, ol.geom.Polygon);
 goog.mixin(P.Plot.Ellipse.prototype, P.Plot.prototype);
 
 P.Plot.Ellipse.prototype.generate = function(){
-    if(this.getPointCount()<2)
+    var count = this.getPointCount();
+    if(count < 2) {
         return;
+    }
     var pnt1 = this.points[0];
     var pnt2 = this.points[1];
     var center = P.PlotUtils.mid(pnt1, pnt2);
