@@ -1,8 +1,0 @@
-{
-  "name": "gispace-plot-api-sample",
-  "author": "cuifudong",
-  "dependencies":{
-      "express": "*",
-      "swig": "*"
-  }
-}
