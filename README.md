@@ -4,7 +4,7 @@
 
 基于OpenLayers3 (http://openlayers.org) 实现动态标绘API。
 
-在线体验 http://ilocation.xyz:9000/index
+在线体验 http://ilocation.oschina.io/plot4ol3sample
 
 当前版本V1.0，实现的功能包括：
 - 标绘符号绘制；
